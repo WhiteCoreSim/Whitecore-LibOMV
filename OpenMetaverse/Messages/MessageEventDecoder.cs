@@ -111,6 +111,7 @@ namespace OpenMetaverse.Messages
                 // MapLayerGod
                 // NewFileAgentInventory
                 // RequestTextureDownload
+                // SearchStatRequest
                 // SearchStatTracking
                 // SendUserReport
                 // SendUserReportWithScreenshot
