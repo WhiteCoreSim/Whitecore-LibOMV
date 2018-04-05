@@ -1304,6 +1304,8 @@ namespace OpenMetaverse
         public InternalDictionary<UUID, List<ChatSessionMember>> GroupChatSessions = new InternalDictionary<UUID, List<ChatSessionMember>> ();
         /// <summary>Dictionary containing mute list keyead on mute name and key</summary>
         public InternalDictionary<string, MuteEntry> MuteList = new InternalDictionary<string, MuteEntry> ();
+        /// <summary>Dictonrary containing active gestures</summary>
+        public InternalDictionary<UUID, UUID> ActiveGestures { get; } = new InternalDictionary<UUID, UUID>();
 
         #region Properties
 
@@ -2596,6 +2598,7 @@ namespace OpenMetaverse
             packet.Data [0] = block;
 
             Client.Network.SendPacket (packet);
+            ActiveGestures[invID] = assetID;
 
         }
 
@@ -2619,6 +2622,7 @@ namespace OpenMetaverse
             packet.Data [0] = block;
 
             Client.Network.SendPacket (packet);
+            ActiveGestures.Remove(invID);
         }
         #endregion
 
@@ -3972,6 +3976,11 @@ namespace OpenMetaverse
             homePosition = reply.HomePosition;
             homeLookAt = reply.HomeLookAt;
             lookAt = reply.LookAt;
+
+            foreach (var gesture in reply.Gestures)
+            {
+                ActiveGestures.Add(gesture.Key, gesture.Value);
+            }
         }
 
         void Network_OnDisconnected (object sender, DisconnectedEventArgs e)

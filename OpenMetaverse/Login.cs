@@ -289,6 +289,7 @@ namespace OpenMetaverse
         public uint COFVersion;
         public string InitialOutfit;
         public bool FirstLogin;
+        public Dictionary<UUID, UUID> Gestures;
 
         /// <summary>
         /// Parse LLSD Login Reply Data
@@ -361,7 +362,8 @@ namespace OpenMetaverse
                 var buddys = new List<BuddyListEntry>();
                 var buddyArray = (OSDArray)buddyLLSD;
 
-                foreach (var bddy in buddyArray) {
+                foreach (var bddy in buddyArray)
+                {
                     if (bddy.Type == OSDType.Map)
                     {
                         var bud = new BuddyListEntry();
@@ -542,6 +544,34 @@ namespace OpenMetaverse
                 }
             }
 
+            Gestures = new Dictionary<UUID, UUID>();
+            if (reply.ContainsKey("gestures") && reply["gestures"] is ArrayList)
+            {
+                var gestureMaps = (ArrayList)reply["gestures"];
+                foreach (var item in gestureMaps)
+                {
+                    var gestureMap = item as Hashtable;
+                    if (gestureMap == null || !gestureMap.ContainsKey("item_id") || !gestureMap.ContainsKey("asset_id"))
+                    {
+                        continue;
+                    }
+
+                    UUID itemId;
+                    if (!UUID.TryParse(gestureMap["item_id"].ToString(), out itemId))
+                    {
+                        continue;
+                    }
+
+                    UUID assetId;
+                    if (!UUID.TryParse(gestureMap["asset_id"].ToString(), out assetId))
+                    {
+                        continue;
+                    }
+
+                    Gestures.Add(itemId, assetId);
+                }
+            }
+
             FirstLogin = false;
             if (reply.ContainsKey("login-flags") && reply["login-flags"] is ArrayList)
             {
@@ -615,14 +645,14 @@ namespace OpenMetaverse
         {
             OSD osd;
             if (reply.TryGetValue(key, out osd))
-            switch (osd.Type)
-            {
-                case OSDType.Array:
-                    return ((OSDArray) osd).AsVector3();
-                case OSDType.String:
-                    OSDArray array = (OSDArray) OSDParser.DeserializeLLSDNotation(osd.AsString());
-                    return array.AsVector3();
-            }
+                switch (osd.Type)
+                {
+                    case OSDType.Array:
+                        return ((OSDArray)osd).AsVector3();
+                    case OSDType.String:
+                        OSDArray array = (OSDArray)OSDParser.DeserializeLLSDNotation(osd.AsString());
+                        return array.AsVector3();
+                }
 
             return Vector3.Zero;
         }
@@ -1060,7 +1090,7 @@ namespace OpenMetaverse
                 loginParams.Password = string.Empty;
 
             // Convert the password to MD5 if it isn't already
-            if (loginParams.Password.Length != 35 && !loginParams.Password.StartsWith ("$1$", StringComparison.Ordinal))
+            if (loginParams.Password.Length != 35 && !loginParams.Password.StartsWith("$1$", StringComparison.Ordinal))
                 loginParams.Password = Utils.MD5(loginParams.Password);
 
             if (loginParams.ViewerDigest == null)
@@ -1205,7 +1235,7 @@ namespace OpenMetaverse
                     var cc = CurrentContext;
                     // Start the request
                     Thread requestThread = new Thread(
-                        delegate()
+                        delegate ()
                         {
                             try
                             {
