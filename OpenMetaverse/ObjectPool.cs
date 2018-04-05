@@ -35,7 +35,7 @@ namespace OpenMetaverse
     public class UDPPacketBuffer
     {
         /// <summary>Size of the byte array used to store raw packet data</summary>
-        public const int BUFFER_SIZE = 4096;
+        public const int DEFAULT_BUFFER_SIZE = 4096;
         /// <summary>Raw packet data buffer</summary>
         public readonly byte [] Data;
         /// <summary>Length of the data to transmit</summary>
@@ -52,7 +52,7 @@ namespace OpenMetaverse
         /// </summary>
         public UDPPacketBuffer ()
         {
-            Data = new byte [BUFFER_SIZE];
+            Data = new byte [DEFAULT_BUFFER_SIZE];
             // Will be modified later by BeginReceiveFrom()
             RemoteEndPoint = new IPEndPoint (Settings.BIND_ADDR, 0);
         }
@@ -63,7 +63,7 @@ namespace OpenMetaverse
         /// <param name="endPoint">EndPoint of the remote host</param>
         public UDPPacketBuffer (IPEndPoint endPoint)
         {
-            Data = new byte [BUFFER_SIZE];
+            Data = new byte [DEFAULT_BUFFER_SIZE];
             RemoteEndPoint = endPoint;
         }
 

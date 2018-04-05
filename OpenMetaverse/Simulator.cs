@@ -731,7 +731,7 @@ namespace OpenMetaverse
                     var close = new CloseCircuitPacket();
                     var buf = new UDPPacketBuffer(remoteEndPoint);
                     byte[] data = close.ToBytes();
-                    Buffer.BlockCopy(data, 0, buf.Data, 0, data.Length);
+                    buf.CopyFrom(data);
                     buf.DataLength = data.Length;
 
                     AsyncBeginSend(buf);
@@ -856,20 +856,18 @@ namespace OpenMetaverse
                     // Remove the MSG_ZEROCODED flag and send the unencoded data
                     // instead
                     data[0] = (byte)(data[0] & ~Helpers.MSG_ZEROCODED);
-                    //Buffer.BlockCopy(data, 0, buffer.Data, 0, dataLength);
                     buffer.CopyFrom(data, dataLength);
                 }
             }
             else
             {
-                //Buffer.BlockCopy(data, 0, buffer.Data, 0, dataLength)
                 buffer.CopyFrom(data, dataLength);
             }
             buffer.DataLength = dataLength;
 
             #region Queue or Send
 
-            var outgoingPacket = new OutgoingPacket(this, buffer, type);
+            OutgoingPacket outgoingPacket = new OutgoingPacket(this, buffer, type);
 
             // Send ACK and logout packets directly, everything else goes through the queue
             if (Client.Settings.THROTTLE_OUTGOING_PACKETS == false ||
