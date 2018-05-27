@@ -47,80 +47,75 @@ namespace OpenMetaverse.Messages
 
             switch (eventName)
             {
+                case "AgentDropGroup": message = new AgentDropGroupMessage(); break;
                 case "AgentGroupDataUpdate": message = new AgentGroupDataUpdateMessage(); break;
+                case "AgentStateUpdate": message = new AgentStateUpdateMessage(); break;
+                case "AttachmentResources": message = AttachmentResourcesMessage.GetMessageHandler(map); break;
                 case "AvatarGroupsReply": message = new AgentGroupDataUpdateMessage(); break; // OpenSim sends the above with the wrong? key
-                case "ParcelProperties": message = new ParcelPropertiesMessage(); break;
-                case "ParcelObjectOwnersReply": message = new ParcelObjectOwnersReplyMessage(); break;
-                case "TeleportFinish": message = new TeleportFinishMessage(); break;
-                case "EnableSimulator": message = new EnableSimulatorMessage(); break;
-                case "ParcelPropertiesUpdate": message = new ParcelPropertiesUpdateMessage(); break;
-                case "EstablishAgentCommunication": message = new EstablishAgentCommunicationMessage(); break;
+                case "BulkUpdateInventory": message = new BulkUpdateInventoryMessage(); break;
+                case "ChatSessionRequest": message = new ChatSessionRequestMessage(); break;
                 case "ChatterBoxInvitation": message = new ChatterBoxInvitationMessage(); break;
+                case "ChatterBoxSessionAgentListUpdates": message = new ChatterBoxSessionAgentListUpdatesMessage(); break;
                 case "ChatterBoxSessionEventReply": message = new ChatterboxSessionEventReplyMessage(); break;
                 case "ChatterBoxSessionStartReply": message = new ChatterBoxSessionStartReplyMessage(); break;
-                case "ChatterBoxSessionAgentListUpdates": message = new ChatterBoxSessionAgentListUpdatesMessage(); break;
-                case "RequiredVoiceVersion": message = new RequiredVoiceVersionMessage(); break;
-                case "MapLayer": message = new MapLayerMessage(); break;
-                case "ChatSessionRequest": message = new ChatSessionRequestMessage(); break;
                 case "CopyInventoryFromNotecard": message = new CopyInventoryFromNotecardMessage(); break;
-                case "ProvisionVoiceAccountRequest": message = new ProvisionVoiceAccountRequestMessage(); break;
-                case "Viewerstats": message = new ViewerStatsMessage(); break;
-                case "UpdateAgentLanguage": message = new UpdateAgentLanguageMessage(); break;
-                case "RemoteParcelRequest": message = new RemoteParcelRequestMessage(); break;
-                case "UpdateScriptTask": message = new UpdateScriptTaskMessage(); break;
-                case "UpdateScriptAgent": message = new UpdateScriptAgentMessage(); break;
-                case "SendPostcard": message = new SendPostcardMessage(); break;
-                case "UpdateGestureAgentInventory": message = new UpdateGestureAgentInventoryMessage(); break;
-                case "UpdateNotecardAgentInventory": message = new UpdateNotecardAgentInventoryMessage(); break;
-                case "LandStatReply": message = new LandStatReplyMessage(); break;
-                case "ParcelVoiceInfoRequest": message = new ParcelVoiceInfoRequestMessage(); break;
-                case "ViewerStats": message = new ViewerStatsMessage(); break;
-                case "EventQueueGet": message = new EventQueueGetMessage(); break;
                 case "CrossedRegion": message = new CrossedRegionMessage(); break;
-                case "TeleportFailed": message = new TeleportFailedMessage(); break;
-                case "PlacesReply": message = new PlacesReplyMessage(); break;
-                case "UpdateAgentInformation": message = new UpdateAgentInformationMessage(); break;
                 case "DirLandReply": message = new DirLandReplyMessage(); break;
-                case "ScriptRunningReply": message = new ScriptRunningReplyMessage(); break;
-                case "SearchStatRequest": message = new SearchStatRequestMessage(); break;
-                case "AgentDropGroup": message = new AgentDropGroupMessage(); break;
-                case "AgentStateUpdate": message = new AgentStateUpdateMessage(); break;
-                case "ForceCloseChatterBoxSession": message = new ForceCloseChatterBoxSessionMessage(); break;
-                case "UploadBakedTexture": message = new UploadBakedTextureMessage(); break;
-                case "RegionInfo": message = new RegionInfoMessage(); break;
-                case "ObjectMediaNavigate": message = new ObjectMediaNavigateMessage(); break;
-                case "ObjectMedia": message = new ObjectMediaMessage(); break;
-                case "AttachmentResources": message = AttachmentResourcesMessage.GetMessageHandler(map); break;
-                case "LandResources": message = LandResourcesMessage.GetMessageHandler(map); break;
-                case "GetDisplayNames": message = new GetDisplayNamesMessage(); break;
-                case "SetDisplayName": message = new SetDisplayNameMessage(); break;
-                case "SetDisplayNameReply": message = new SetDisplayNameReplyMessage(); break;
-                case "DisplayNameUpdate": message = new DisplayNameUpdateMessage(); break;
-                //case "ProductInfoRequest": message = new ProductInfoRequestMessage(); break;
-                case "ObjectPhysicsProperties": message = new ObjectPhysicsPropertiesMessage(); break;
-                case "BulkUpdateInventory": message = new BulkUpdateInventoryMessage(); break;
-                case "RenderMaterials": message = new RenderMaterialsMessage(); break;
-                case "GetObjectCost": message = GetObjectCostMessage.GetMessageHandler(map); break;
-
-                // Capabilities TODO:
                 // DispatchRegionInfo
+                case "DisplayNameUpdate": message = new DisplayNameUpdateMessage(); break;
+                case "EnableSimulator": message = new EnableSimulatorMessage(); break;
+                case "EstablishAgentCommunication": message = new EstablishAgentCommunicationMessage(); break;
                 // EstateChangeInfo
-                // EventQueueGet
+                case "EventQueueGet": message = new EventQueueGetMessage(); break;
                 // FetchInventoryDescendents
+                case "ForceCloseChatterBoxSession": message = new ForceCloseChatterBoxSessionMessage(); break;
+                case "GetDisplayNames": message = new GetDisplayNamesMessage(); break;
+                case "GetObjectCost": message = GetObjectCostMessage.GetMessageHandler(map); break;
                 // GroupProposalBallot
+                case "LandResources": message = LandResourcesMessage.GetMessageHandler(map); break;
+                case "LandStatReply": message = new LandStatReplyMessage(); break;
+                case "MapLayer": message = new MapLayerMessage(); break;
                 // MapLayerGod
                 // NewFileAgentInventory
+                case "ObjectMedia": message = new ObjectMediaMessage(); break;
+                case "ObjectMediaNavigate": message = new ObjectMediaNavigateMessage(); break;
+                case "ObjectPhysicsProperties": message = new ObjectPhysicsPropertiesMessage(); break;
+                case "ParcelObjectOwnersReply": message = new ParcelObjectOwnersReplyMessage(); break;
+                case "ParcelProperties": message = new ParcelPropertiesMessage(); break;
+                case "ParcelPropertiesUpdate": message = new ParcelPropertiesUpdateMessage(); break;
+                case "ParcelVoiceInfoRequest": message = new ParcelVoiceInfoRequestMessage(); break;
+                case "PlacesReply": message = new PlacesReplyMessage(); break;
+                // ProductInfoRequest
+                case "ProvisionVoiceAccountRequest": message = new ProvisionVoiceAccountRequestMessage(); break;
+                case "RegionInfo": message = new RegionInfoMessage(); break;
+                case "RemoteParcelRequest": message = new RemoteParcelRequestMessage(); break;
+                case "RenderMaterials": message = new RenderMaterialsMessage(); break;
                 // RequestTextureDownload
-                // SearchStatRequest
+                case "RequiredVoiceVersion": message = new RequiredVoiceVersionMessage(); break;
+                case "ScriptRunningReply": message = new ScriptRunningReplyMessage(); break;
+                case "SearchStatRequest": message = new SearchStatRequestMessage(); break;
                 // SearchStatTracking
+                case "SendPostcard": message = new SendPostcardMessage(); break;
                 // SendUserReport
                 // SendUserReportWithScreenshot
                 // ServerReleaseNotes
+                case "SetDisplayName": message = new SetDisplayNameMessage(); break;
+                case "SetDisplayNameReply": message = new SetDisplayNameReplyMessage(); break;
                 // StartGroupProposal
-                // UpdateGestureTaskInventory
-                // UpdateNotecardTaskInventory
-                // ViewerStartAuction
+                case "TeleportFailed": message = new TeleportFailedMessage(); break;
+                case "TeleportFinish": message = new TeleportFinishMessage(); break;
                 // UntrustedSimulatorMessage
+                case "UpdateAgentInformation": message = new UpdateAgentInformationMessage(); break;
+                case "UpdateAgentLanguage": message = new UpdateAgentLanguageMessage(); break;
+                case "UpdateGestureAgentInventory": message = new UpdateGestureAgentInventoryMessage(); break;
+                // UpdateGestureTaskInventory
+                case "UpdateNotecardAgentInventory": message = new UpdateNotecardAgentInventoryMessage(); break;
+                // UpdateNotecardTaskInventory
+                case "UpdateScriptAgent": message = new UpdateScriptAgentMessage(); break;
+                case "UpdateScriptTask": message = new UpdateScriptTaskMessage(); break;
+                case "UploadBakedTexture": message = new UploadBakedTextureMessage(); break;
+                // ViewerStartAuction
+                case "ViewerStats": message = new ViewerStatsMessage(); break;
             }
 
             if (message != null)
@@ -132,7 +127,7 @@ namespace OpenMetaverse.Messages
                 }
                 catch (Exception e)
                 {
-                    Logger.Log("Exception while trying to Deserialize " + eventName + ":" + e.Message + ": " + e.StackTrace, Helpers.LogLevel.Error);                    
+                    Logger.Log("Exception while trying to Deserialize " + eventName + ":" + e.Message + ": " + e.StackTrace, Helpers.LogLevel.Error);
                 }
 
                 return null;
