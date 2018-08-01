@@ -216,9 +216,6 @@ namespace OpenMetaverse
             req.Add ("IsExperienceContributor");
             req.Add ("RegionExperiences");
             req.Add ("UpdateExperience");
-			// AIS3
-            req.Add("InventoryAPIv3");
-            req.Add("LibraryAPIv3");
 
             _SeedRequest = new CapsClient (new Uri (_SeedCapsURI));
             _SeedRequest.OnComplete += SeedRequestCompleteHandler;
