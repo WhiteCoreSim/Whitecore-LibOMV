@@ -125,6 +125,8 @@ namespace OpenMetaverse
             OSDArray req = new OSDArray ();
             // This list can be updated by using the following command to obtain a current list of capabilities the official linden viewer supports:
             // wget -q -O - https://bitbucket.org/lindenlab/viewer-release/raw/default/indra/newview/llviewerregion.cpp | grep 'capabilityNames.append'  | sed 's/^[ \t]*//;s/capabilityNames.append("/req.Add("/'
+            req.Add ("AbuseCategories"); // Retrieves all Abuse Categories for the viewer
+            req.Add ("AgentExperiences"); // Experience Caps
             req.Add ("AgentPreferences");
             req.Add ("AgentState");
             req.Add ("AttachmentResources");
@@ -139,13 +141,19 @@ namespace OpenMetaverse
             req.Add ("EnvironmentSettings");
             req.Add ("EstateChangeInfo");
             req.Add ("EventQueueGet");
+            req.Add ("ExperiencePreferences"); // Experience Caps
             req.Add ("FacebookConnect");
             req.Add ("FetchInventory2");
             req.Add ("FetchInventoryDescendents2");
             req.Add ("FetchLib2");
             req.Add ("FetchLibDescendents2");
+            req.Add ("FindExperienceByName"); // Experience Caps
             req.Add ("FlickrConnect");
+            req.Add ("GetAdminExperiences"); // Experience Caps
+            req.Add ("GetCreatorExperiences"); // Experience Caps
             req.Add ("GetDisplayNames");
+            req.Add ("GetExperienceInfo"); // Experience Caps
+            req.Add ("GetExperiences"); // Experience Caps
             req.Add ("GetMesh");
             req.Add ("GetMesh2");
             req.Add ("GetMetadata");
@@ -153,10 +161,13 @@ namespace OpenMetaverse
             req.Add ("GetObjectPhysicsData");
             req.Add ("GetTexture");
             req.Add ("GroupAPIv1");
+            req.Add ("GroupExperiences"); // Experience Caps
             req.Add ("GroupMemberData");
             req.Add ("GroupProposalBallot");
             req.Add ("HomeLocation");
             req.Add ("IncrementCOFVersion");
+            req.Add ("IsExperienceAdmin"); // Experience Caps
+            req.Add ("IsExperienceContributor"); // Experience Caps
             req.Add ("LandResources");
             req.Add ("LSLSyntax");
             req.Add ("MapLayer");
@@ -171,6 +182,8 @@ namespace OpenMetaverse
             req.Add ("ParcelVoiceInfoRequest");
             req.Add ("ProductInfoRequest");
             req.Add ("ProvisionVoiceAccountRequest");
+            req.Add ("RegionExperiences"); // Experience Caps
+            //req.Add("ReadOfflineMsgs");
             req.Add ("RemoteParcelRequest");
             req.Add ("RenderMaterials");
             req.Add ("RequestTextureDownload");
@@ -193,6 +206,7 @@ namespace OpenMetaverse
             req.Add ("UpdateAgentInformation");
             req.Add ("UpdateAgentLanguage");
             req.Add ("UpdateAvatarAppearance");
+            req.Add ("UpdateExperience"); // Experience Caps
             req.Add ("UpdateGestureAgentInventory");
             req.Add ("UpdateGestureTaskInventory");
             req.Add ("UpdateNotecardAgentInventory");
@@ -200,22 +214,11 @@ namespace OpenMetaverse
             req.Add ("UpdateScriptAgent");
             req.Add ("UpdateScriptTask");
             req.Add ("UploadBakedTexture");
+            req.Add ("UserInfo"); // ?? No clue what this Caps is for
+            req.Add ("ViewerAsset"); // ?? No clue what this Caps is for
             req.Add ("ViewerMetrics");
             req.Add ("ViewerStartAuction");
-            req.Add ("ViewerStats");
-            // Experiences
-            req.Add ("AgentExperiences");
-            req.Add ("ExperiencePreferences");
-            req.Add ("FindExperienceByName");
-            req.Add ("GetExperiences");            
-            req.Add ("GetExperienceInfo");
-            req.Add ("GetAdminExperiences");
-            req.Add ("GetCreatorExperiences");            
-            req.Add ("GroupExperiences");            
-            req.Add ("IsExperienceAdmin");
-            req.Add ("IsExperienceContributor");
-            req.Add ("RegionExperiences");
-            req.Add ("UpdateExperience");
+            req.Add ("ViewerStats");            
 
             _SeedRequest = new CapsClient (new Uri (_SeedCapsURI));
             _SeedRequest.OnComplete += SeedRequestCompleteHandler;
