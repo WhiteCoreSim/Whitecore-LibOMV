@@ -3,7 +3,8 @@ language: csharp
 mono:
   - latest
 script:
-  - ./runprebuild.sh xnant
+  - ./runprebuild.sh
+  - xbuild OpenMetaverse.sln
 notifications:
   irc:
     channels:
