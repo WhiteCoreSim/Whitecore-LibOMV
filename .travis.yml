@@ -1,0 +1,15 @@
+language: csharp
+
+mono:
+  - latest
+script:
+  - ./runprebuild.sh xnant
+notifications:
+  irc:
+    channels:
+      - "chat.freenode.net#whitecore-dev"
+    on_success: always
+    on_failure: always
+    use_notice: true
+    skip_join: true
+sudo: false
