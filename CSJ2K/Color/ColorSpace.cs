@@ -261,17 +261,17 @@ namespace CSJ2K.Color
 		/// <summary>Return bitdepth of the palette entries. </summary>
 		public virtual int getPaletteChannelBits(int c)
 		{
-			return pbox == null ? 0 : pbox.getBitDepth (c);
-		}
-		
-		/// <summary> Return a palettized sample</summary>
-		/// <param name="channel">requested 
-		/// </param>
-		/// <param name="index">of entry
-		/// </param>
-		/// <returns> palettized sample
-		/// </returns>
-		public virtual int getPalettizedSample(int channel, int index)
+            return pbox == null ? 0 : pbox.getBitDepth(c);
+        }
+
+        /// <summary> Return a palettized sample</summary>
+        /// <param name="channel">requested 
+        /// </param>
+        /// <param name="index">of entry
+        /// </param>
+        /// <returns> palettized sample
+        /// </returns>
+        public virtual int getPalettizedSample(int channel, int index)
 		{
 			return pbox == null?0:pbox.getEntry(channel, index);
 		}
