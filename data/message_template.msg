@@ -6,9 +6,9 @@ version 2.0
 // numbers. Each message must be numbered relative to the
 // other messages of that type. The current highest number 
 // for each type is listed below:
-// Low: 429
+// Low: 430
 // Medium: 18
-// High: 29
+// High: 30
 // PLEASE UPDATE THIS WHEN YOU ADD A NEW MESSAGE!
 
 
@@ -3574,7 +3574,6 @@ version 2.0
 	}
 
 }
-
 // AvatarAppearance - Update visual params
 {
 	AvatarAppearance Low 158 Trusted Zerocoded
@@ -4507,6 +4506,11 @@ version 2.0
 		RegionAllowAccessBlock Single
 		{   RegionAllowAccessOverride BOOL    }
 	}
+    {
+        ParcelEnvironmentBlock Single
+        {   ParcelEnvironmentVersion        S32  }
+        {   RegionAllowEnvironmentOverride  BOOL }
+    }
 }
 
 // ParcelPropertiesUpdate
@@ -5791,6 +5795,28 @@ version 2.0
 		ParamList		Variable
 		{	Parameter	Variable 1 }
 	}
+}
+
+// LargeGenericMessage
+// Similar to the above messages, but can handle larger payloads and serialized 
+// LLSD.  Uses HTTP transport 
+{
+    LargeGenericMessage Low 430 NotTrusted Unencoded UDPDeprecated
+    {
+		AgentData 		Single
+		{   AgentID     LLUUID  	}
+		{	SessionID	LLUUID		}
+		{	TransactionID	LLUUID	}
+    }
+    {
+        MethodData Single
+		{	Method		Variable 1 }
+		{	Invoice		LLUUID	}
+    }
+    {
+		ParamList		Variable
+		{	Parameter	Variable 2 }
+    }
 }
 
 // ***************************************************************************
@@ -7308,6 +7334,29 @@ version 2.0
 
 
 // *************************************************************************
+// Object animation messages
+// *************************************************************************
+
+// Note this is basically identical to AvatarAnimation.
+// Needs to be a different message because existing viewers
+// have insufficiently smart handler functions.
+
+// ObjectAnimation - Update animation state
+// simulator --> viewer
+{
+        ObjectAnimation High 30 Trusted Unencoded
+        {
+                Sender                  Single
+                {       ID                      LLUUID  }
+        }
+        {
+                AnimationList Variable
+                { AnimID                LLUUID }
+                { AnimSequenceID S32 }
+        }
+}
+
+// *************************************************************************
 // Asset storage messages
 // *************************************************************************
 
@@ -8744,7 +8793,7 @@ version 2.0
 		{	Agents		U8				}
 		{	MapImageID	LLUUID			}
 	}
-	{	
+	{
 		Size			Variable
 		{	SizeX		U16				}
 		{	SizeY		U16				}
